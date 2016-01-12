@@ -1,0 +1,46 @@
+<div>
+    <form>
+        <div class"form-group">        
+        <label class="control-label"for="focusedInput">Post Name</label>
+            <input type="text" ng-model="post.name" class="form-control">
+        </div>
+        <div class"form-group">        
+        <label class="control-label"for="focusedInput">Post Description</label>
+            <input type="text" ng-model="post.description" class="form-control">
+        </div>
+        <div class"form-group">        
+        <label class="control-label"for="focusedInput">Post URL</label>
+            <input type="text" ng-model="post.url" class="form-control">
+        </div>
+        <br>
+        <button ng-click="savePost(post)" class="btn btn-success btn-block">Save Post</button>
+    </form>
+</div>
+<div ng-repeat="post in posts">
+    <h2><a ng-href="{{post.url}}">{{post.name}}</a></h2>
+    <p>{{post.description}}</p>
+    <button ng-click="deletePost(post)" class="btn btn-danger">Delete Post</button> 
+    <span>{{post.votes}}</span>
+    <button ng-click="addVote(post)" class="btn btn-primary">Add Vote</button>
+    <br>
+    <br>
+    <div class="panel panel-default" ng-repeat="comment in comments">
+        <div class="panel-body">
+            <a ng-href="https://twitter.com/{{comment.user}}">{{comment.user}}</a>
+        </div>
+        <div class="panel-footer">
+            {{comment.text}}
+            <br>
+            <button class="btn btn-danger" ng-click="removeComment(post, comment)">Remove Comment</button>
+        </div>
+    </div>
+    <form>
+        <div class="input-group">
+            <input ng-model="comment.text" class="form-control">
+            <div class="input-group-btn"><button ng-click="addComment(post, comment)" class ="btn btn-success">Add Comment</button></div>
+        </div>
+    </form>
+</div>
+<br>
+<button class="btn btn-primary" ng-click="login()">Login with Twitter</button>
+<span>Currently logged in as: {{authData.twitter.username}}</span>
